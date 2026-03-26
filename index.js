@@ -1,17 +1,26 @@
-const day = parseInt(prompt("Введите день:"));
-const month = parseInt(prompt("Введите месяц:"));
-const year = parseInt(prompt("Введите год:"));
-
-const date = new Date(year, month - 1, day);
-
-console.log("День недели:", date.toLocaleDateString("ru-RU", { weekday: "long" }));
-
-const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
-console.log("Високосный год:", leap ? "Да" : "Нет");
-
-const today = new Date();
-let age = today.getFullYear() - year;
-if (today.getMonth() < month - 1 || (today.getMonth() === month - 1 && today.getDate() < day)) {
-    age--;
+digits = {
+    "0": [" *** ", "*   *", "*   *", "*   *", " *** "],
+    "1": ["  *  ", " **  ", "  *  ", "  *  ", " *** "],
+    "2": [" *** ", "*   *", "   * ", "  *  ", "*****"],
+    "3": [" *** ", "    *", "  ** ", "    *", " *** "],
+    "4": ["*   *", "*   *", "*****", "    *", "    *"],
+    "5": ["*****", "*    ", "**** ", "    *", "**** "],
+    "6": [" *** ", "*    ", "**** ", "*   *", " *** "],
+    "7": ["*****", "    *", "   * ", "  *  ", "  *  "],
+    "8": [" *** ", "*   *", " *** ", "*   *", " *** "],
+    "9": [" *** ", "*   *", " ****", "    *", " *** "],
 }
-console.log("Возраст:", age);
+
+def print_date(date):
+    rows = [""] * 5
+    for char in date:
+        if char == " ":
+            for i in range(5):
+                rows[i] += "   "
+        else:
+            for i in range(5):
+                rows[i] += digits[char] + " "
+    print("\n".join(rows))
+
+date = "29 03 2000"
+print_date(date)
